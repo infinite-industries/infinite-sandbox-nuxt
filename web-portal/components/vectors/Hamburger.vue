@@ -39,7 +39,7 @@ export default {
   },
   methods:{
     ToggleNav: function(){
-      this.$store.dispatch('toggleSidebar')
+      this.$store.dispatch('ui/toggleSidebar')
     }
   },
   computed: {
