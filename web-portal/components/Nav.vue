@@ -5,6 +5,7 @@
         <router-link :to="item.route">
           {{ item.title }}
         </router-link>
+        <a href="/login" @click="onLogin" v-if="!$auth.loggedIn">Login</a>
       </li>
     </ul>
   </div>
@@ -42,6 +43,12 @@ export default {
       x: this.$el.offsetWidth,
       zIndex: 20
     })
+  },
+  methods: {
+    onLogin (e) {
+      e.preventDefault()
+      this.$auth.loginwith('auth0')
+    }
   }
 }
 </script>
