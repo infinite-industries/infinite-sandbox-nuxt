@@ -1,6 +1,8 @@
 import VuetifyLoaderPlugin from 'vuetify-loader/lib/plugin'
 import pkg from './package'
 
+import 'dotenv/config'
+
 export default {
   mode: 'universal',
 
@@ -50,6 +52,7 @@ export default {
   modules: [
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
+    '@nuxtjs/auth',
     '@nuxtjs/pwa'
   ],
   /*
@@ -57,6 +60,25 @@ export default {
   */
   axios: {
     // See https://github.com/nuxt-community/axios-module#options
+  },
+
+  /*
+  ** Auth configuration
+  */
+  auth: {
+    strategies: {
+      local: false,
+      auth0: {
+        domain: process.env.AUTH0_CLIENT_DOMAIN,
+        client_id: process.env.AUTH0_CLIENT_ID
+      }
+    },
+    redirect: {
+      login: '/login',
+      logout: '/',
+      home: '/',
+      callback: process.env.AUTH0_REDIRECT
+    }
   },
 
   /*
