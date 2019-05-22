@@ -29,10 +29,13 @@ export default {
   },
   mounted: function(){
     // Adjust the row size
-    this.$nextTick(function() {
-      this.adjustCardSpacing()
-      window.addEventListener('resize', this.adjustCardSpacing)
-    })
+    // (client-only)
+    if (!this.$isServer) {
+      this.$nextTick(function() {
+        this.adjustCardSpacing()
+        window.addEventListener('resize', this.adjustCardSpacing)
+      })
+    }
   },
   beforeDestroy: function() {
     window.removeEventListener('resize', this.adjustCardSpacing)
@@ -45,7 +48,7 @@ export default {
   },
   watch:{
     LOADING: function(value){
-      if(value==false){
+      if(value==false && !this.$isServer){
         this.$nextTick(function() {
           this.adjustCardSpacing()
         })
