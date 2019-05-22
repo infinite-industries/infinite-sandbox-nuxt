@@ -35,18 +35,18 @@ export const actions = {
     axios.get('http://localhost:3003/events').then(({ data }) => {
       commit('setEvents', data.events)
     }).catch((error) => {
-      window.console.error(error)
+      console.error(error)
       // TODO: notification?
     }).finally(() => commit('stopLoading'))
   },
-  loadEvent ({ commit }, eventId) {
+  loadEvent({ commit }, eventId) {
     commit('startLoading')
     axios.get('/events.json').then(({ data }) => {
-      const event = data.find((e) => e.id === eventId)
+      const event = data.find(e => e.id === eventId)
       if (event) commit('setEvent', event)
       else throw new Error('Event not found')
     }).catch((error) => {
-      window.console.error(error)
+      console.error(error)
       // TODO: notification?
     }).finally(() => commit('stopLoading'))
   }

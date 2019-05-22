@@ -36,7 +36,7 @@ export default {
   },
   watch: {
     LOADING(value) {
-      if (value === false) {
+      if (value === false && !this.$isServer) {
         this.$nextTick(function () {
           this.adjustCardSpacing()
         })
@@ -45,10 +45,13 @@ export default {
   },
   mounted() {
     // Adjust the row size
-    this.$nextTick(function () {
-      this.adjustCardSpacing()
-      window.addEventListener('resize', this.adjustCardSpacing)
-    })
+    // (client-only)
+    if (!this.$isServer) {
+      this.$nextTick(function () {
+        this.adjustCardSpacing()
+        window.addEventListener('resize', this.adjustCardSpacing)
+      })
+    }
   },
   beforeDestroy() {
     window.removeEventListener('resize', this.adjustCardSpacing)

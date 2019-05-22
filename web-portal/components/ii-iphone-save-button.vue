@@ -16,6 +16,8 @@ export default {
     }
   },
   mounted: function(){
+    if (typeof window === 'undefined') return
+
     // Detects if device is on iOS
     const isIos = () => {
       const userAgent = window.navigator.userAgent.toLowerCase()
