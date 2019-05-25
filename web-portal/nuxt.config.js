@@ -53,7 +53,8 @@ export default {
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
     '@nuxtjs/auth',
-    '@nuxtjs/pwa'
+    '@nuxtjs/pwa',
+    '@nuxtjs/google-gtag'
   ],
   /*
   ** Axios module configuration
@@ -73,6 +74,15 @@ export default {
         client_id: process.env.AUTH0_CLIENT_ID,
         redirect_uri: process.env.AUTH0_CALLBACK
       }
+    }
+  },
+  /*
+  ** Google Analytics configuration
+  */
+  'google-gtag': {
+    id: process.env.GOOGLE_ANALYTICS_ID,
+    config: {
+      anonymize_ip: true // TODO: can we do this?
     }
   },
 
