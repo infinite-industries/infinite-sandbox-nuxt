@@ -72,12 +72,6 @@ export default {
         domain: process.env.AUTH0_CLIENT_DOMAIN,
         client_id: process.env.AUTH0_CLIENT_ID
       }
-    },
-    redirect: {
-      login: '/login',
-      logout: '/',
-      home: '/',
-      callback: process.env.AUTH0_REDIRECT
     }
   },
 
@@ -91,20 +85,21 @@ export default {
       stylus: {
         import: ['~assets/style/variables.styl']
       }
-    }
+    },
     /*
     ** You can extend webpack config here
     */
-    // extend(config, ctx) {
-    //   // Run ESLint on save
-    //   if (ctx.isDev && ctx.isClient) {
-    //     config.module.rules.push({
-    //       enforce: 'pre',
-    //       test: /\.(js|vue)$/,
-    //       loader: 'eslint-loader',
-    //       exclude: /(node_modules)/
-    //     })
-    //   }
-    // }
+    extend(config, ctx) {
+      config.devtool = ctx.isClient ? 'eval-source-map' : 'inline-source-map'
+      // Run ESLint on save
+      // if (ctx.isDev && ctx.isClient) {
+      //   config.module.rules.push({
+      //     enforce: 'pre',
+      //     test: /\.(js|vue)$/,
+      //     loader: 'eslint-loader',
+      //     exclude: /(node_modules)/
+      //   })
+      // }
+    }
   }
 }
