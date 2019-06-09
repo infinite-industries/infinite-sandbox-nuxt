@@ -5,6 +5,8 @@
         <router-link :to="item.route">
           {{ item.title }}
         </router-link>
+      </li>
+      <li>
         <a href="/login" @click="onLogin" v-if="!$auth.loggedIn">Login</a>
       </li>
     </ul>
@@ -17,7 +19,7 @@ import { TweenMax, Power4 } from 'gsap'
 export default {
   computed: {
     open() {
-      return this.$store.getters.sidebarOpen
+      return this.$store.getters['ui/sidebarOpen']
     },
     visibleNavItems() {
       // TODO: auth considerations?
@@ -47,7 +49,7 @@ export default {
   methods: {
     onLogin (e) {
       e.preventDefault()
-      this.$auth.loginwith('auth0')
+      this.$auth.loginWith('auth0')
     }
   }
 }

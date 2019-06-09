@@ -70,7 +70,8 @@ export default {
       local: false,
       auth0: {
         domain: process.env.AUTH0_CLIENT_DOMAIN,
-        client_id: process.env.AUTH0_CLIENT_ID
+        client_id: process.env.AUTH0_CLIENT_ID,
+        redirect_uri: process.env.AUTH0_CALLBACK
       }
     }
   },

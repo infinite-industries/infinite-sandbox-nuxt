@@ -16,8 +16,8 @@
 </template>
 
 <script>
-import Toolbar from '../components/ii-toolbar.vue'
-import Test from '../components/Test.vue'
+import Toolbar from '../components/Toolbar.vue'
+
 // import Notifications from '../components/ii-notifications.vue'
 // import Subscribe from '../components/ii-subscribe.vue'
 
