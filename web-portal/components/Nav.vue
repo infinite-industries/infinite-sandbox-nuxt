@@ -6,8 +6,13 @@
           {{ item.title }}
         </router-link>
       </li>
-      <li>
-        <a href="/login" @click="onLogin" v-if="!$auth.loggedIn">Login</a>
+      <li v-if="!$auth.loggedIn">
+        <router-link to="/login">
+          Login
+        </router-link>
+      </li>
+      <li v-else>
+        <a href="/logout" @click="onLogout">Log out</a>
       </li>
     </ul>
   </div>
@@ -22,12 +27,15 @@ export default {
       return this.$store.getters['ui/sidebarOpen']
     },
     visibleNavItems() {
-      // TODO: auth considerations?
       const items = [
         { title: 'Home', route: '/' },
         { title: 'About', route: '/about' },
         { title: 'Legal', route: '/legal' }
       ]
+      // TODO: can we write a plugin that sets `this.$auth.admin` based on this?
+      if (this.$auth.loggedIn && this.$auth.user['https://infinite.industries.com/isInfiniteAdmin']) {
+        items.push({ title: 'Admin', route: '/admin' })
+      }
       return items
     }
   },
@@ -47,9 +55,9 @@ export default {
     })
   },
   methods: {
-    onLogin (e) {
+    onLogout (e) {
       e.preventDefault()
-      this.$auth.loginWith('auth0')
+      this.$auth.logout()
     }
   }
 }
